@@ -1,0 +1,20 @@
+services:
+  backend:
+    build: ./backend
+    ports: ["5000:5000"]
+    environment:
+      DATABASE_URL: postgresql://tasks:tasks@postgres:5432/tasks
+    depends_on: [postgres]
+  frontend:
+    build: ./frontend
+    ports: ["5173:5173"]
+    depends_on: [backend]
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: tasks
+      POSTGRES_USER: tasks
+      POSTGRES_PASSWORD: tasks
+    volumes: [task-data:/var/lib/postgresql/data]
+volumes:
+  task-data:
