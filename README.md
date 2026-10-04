@@ -4,7 +4,9 @@
 Python Flask, React TypeScript, PostgreSQL, Pytest, Jest, Docker, SQLAlchemy, Pydantic, Tailwind CSS
 
 ## Features
-CRUD, validation, auth, responsive accessible UI
+CRUD, validation, fixed Bearer-token development auth, responsive accessible UI
+**Status:** In progress — local full-stack project; no production deployment claimed.
+
 
 - Task board with add, edit, complete/uncomplete, delete, and completed filtering
 - Bearer token authentication on every `/api/tasks` endpoint
@@ -65,9 +67,21 @@ curl -X POST http://localhost:5000/api/tasks \
 ## Testing Instructions
 ```bash
 cd backend
-pytest
+pytest -q
 
 cd ../frontend
 npm install
-npm test
+npm test -- --runInBand
+npm run build
 ```
+
+## Verified test run
+
+Run on 2026-10-04:
+
+- Backend: **8 passed**
+- Deterministic verifier: **7 passed**
+- Frontend Jest: **2 passed**
+- Frontend production build: **passed**
+
+Authentication is a deterministic development token check (`Bearer test-token`), not JWT or production identity management.
